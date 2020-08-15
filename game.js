@@ -14,6 +14,12 @@ function onLoad() {
 	else player['EP'] = new OmegaNum(1);
 	if (Object.keys(saveData).includes('OP')) player['OP'] = new OmegaNum(saveData['OP']);
 	else player['OP'] = new OmegaNum(1);
+	if (Object.keys(saveData).includes('auto1toggle')) player['auto1toggle'] = new OmegaNum(saveData['auto1toggle']);
+	else player['auto1toggle'] = new OmegaNum(0);
+	if (Object.keys(saveData).includes('auto2toggle')) player['auto2toggle'] = new OmegaNum(saveData['auto2toggle']);
+	else player['auto2toggle'] = new OmegaNum(0);
+	if (Object.keys(saveData).includes('auto3toggle')) player['auto3toggle'] = new OmegaNum(saveData['auto3toggle']);
+	else player['auto3toggle'] = new OmegaNum(0);
 };
 OmegaNum.prototype.toSWDP = function(digits) {
 	return new OmegaNum(this).times(OmegaNum.pow(10, digits)).round().div(OmegaNum.pow(10, digits));
@@ -33,7 +39,7 @@ function up1buy() {
 }
 function spicy() {
 	if (!player['MP'].gte('1e10')) return;
-	player['MP'] = player['MP'].times('2');
+	player['auto1toggle'] = player['auto1toggle'].plus('1');
 }
 function exponentiate() {
 	if (!player['MP'].gte('1.8e308')) return;
@@ -75,6 +81,14 @@ function final() {
 	player['EP'] = player['EP'].pow(player['EP']);
 	player['EP'] = player['EP'].pow(player['EP']);
 	player['EP'] = player['EP'].pow(player['EP']);
+}
+function auto2up() {
+	if (!player['EP'].gte('eeeee1e10')) return;
+	player['auto2toggle'] = player['auto2toggle'].plus('1');
+}
+function auto3up() {
+	if (!player['OP'].gte('(10^)^1000 10')) return;
+	player['auto3toggle'] = player['auto3toggle'].plus('1');
 }
 function MPgain() {
 	let x = new OmegaNum('0');
@@ -119,8 +133,6 @@ updater_starts['textmpcount'] = 'you have {{MP}} MP';
 updater_starts['buttonsraise'] = 'Raise the number to the power of {{EP}}';
 updater_starts['textepcount'] = 'you have {{EP}}EP';
 updater_starts['buttonsexpo'] = 'Exponentiate for Current Amount:{{EPgain}}EP';
-updater_starts['buttonsOMEGA'] = 'RESET EVERYTHING FOR Current Amount:{{OPgain}} OMEGA POINTS';
-updater_starts['textopcount'] = 'YOU HAVE {{OP}} OMEGA POINTS';
 function parseForUpdates(id) {
 	let txt = updater_starts[id];
 	if (txt.includes('{{') && txt.includes('}}')) {
@@ -147,8 +159,9 @@ function gameLoop(diff) {
 	parseForUpdates('buttonsraise');
 	parseForUpdates('textepcount');
 	parseForUpdates('buttonsexpo');
-	parseForUpdates('buttonsOMEGA');
-	parseForUpdates('textopcount');
+	if (player['auto1toggle'].gte('1')) multiply()
+	if (player['auto2toggle'].gte('1')) exponentiate()
+	if (player['auto3toggle'].gte('1')) final()
 }
 var lastTime = new Date().getTime();
 let interval = setInterval(function() {
