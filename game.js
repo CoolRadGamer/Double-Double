@@ -33,7 +33,7 @@ function prestige() {
 }
 function up1buy() {
 	if (!player['MP'].gte(player['up1cost'])) return;
-	player['multiplier'] = player['multiplier'].plus('1');
+	player['multiplier'] = player['multiplier']'1.5');
 	player['MP'] = player['MP'].minus(player['up1cost']).max(0);
 	player['up1cost'] = player['up1cost'].times('3');
 }
@@ -128,7 +128,6 @@ var updater_starts = {};
 updater_starts['textnumber'] = 'the number is {{number}}';
 updater_starts['buttonsmult'] = 'Multiply the number by {{multiplier}}';
 updater_starts['buttonspres'] = 'prestige for Current Amount:{{MPgain}} multiplier points';
-updater_starts['buttonsup1'] = 'Increase the multiplier by 1, costs {{up1cost}}MP';
 updater_starts['textmpcount'] = 'you have {{MP}} MP';
 updater_starts['buttonsraise'] = 'Raise the number to the power of {{EP}}';
 updater_starts['textepcount'] = 'you have {{EP}}EP';
@@ -154,7 +153,6 @@ function gameLoop(diff) {
 	parseForUpdates('textnumber');
 	parseForUpdates('buttonsmult');
 	parseForUpdates('buttonspres');
-	parseForUpdates('buttonsup1');
 	parseForUpdates('textmpcount');
 	parseForUpdates('buttonsraise');
 	parseForUpdates('textepcount');
