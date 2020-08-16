@@ -125,13 +125,13 @@ function OPgain() {
 	return x;
 }
 var updater_starts = {};
-updater_starts['textnumber'] = 'the number is {{number}}';
 updater_starts['buttonsmult'] = 'Multiply the number by {{multiplier}}';
 updater_starts['buttonspres'] = 'prestige for Current Amount:{{MPgain}} multiplier points';
 updater_starts['textmpcount'] = 'you have {{MP}} MP';
 updater_starts['buttonsraise'] = 'Raise the number to the power of {{EP}}';
 updater_starts['textepcount'] = 'you have {{EP}}EP';
 updater_starts['buttonsexpo'] = 'Exponentiate for Current Amount:{{EPgain}}EP';
+updater_starts['textnumber'] = 'the number is {{number}}';
 function parseForUpdates(id) {
 	let txt = updater_starts[id];
 	if (txt.includes('{{') && txt.includes('}}')) {
@@ -150,13 +150,13 @@ function hardReset(force=false) {
 	onLoad();
 }
 function gameLoop(diff) {
-	parseForUpdates('textnumber');
 	parseForUpdates('buttonsmult');
 	parseForUpdates('buttonspres');
 	parseForUpdates('textmpcount');
 	parseForUpdates('buttonsraise');
 	parseForUpdates('textepcount');
 	parseForUpdates('buttonsexpo');
+	parseForUpdates('textnumber');
 	if (player['auto1toggle'].gte('1')) multiply()
 	if (player['auto2toggle'].gte('1')) exponentiate()
 	if (player['auto3toggle'].gte('1')) final()
