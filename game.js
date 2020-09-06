@@ -129,7 +129,6 @@ updater_starts['buttonsmult'] = 'Multiply the number by {{multiplier}}';
 updater_starts['buttonspres'] = 'prestige for Current Amount:{{MPgain}} multiplier points';
 updater_starts['textmpcount'] = 'you have {{MP}} MP';
 updater_starts['buttonsraise'] = 'Raise the number to the power of {{EP}}';
-updater_starts['textepcount'] = 'you have {{EP}}EP';
 function parseForUpdates(id) {
 	let txt = updater_starts[id];
 	if (txt.includes('{{') && txt.includes('}}')) {
@@ -152,7 +151,6 @@ function gameLoop(diff) {
 	parseForUpdates('buttonspres');
 	parseForUpdates('textmpcount');
 	parseForUpdates('buttonsraise');
-	parseForUpdates('textepcount');
 	if (player['auto1toggle'].gte('1')) multiply()
 	if (player['auto2toggle'].gte('1')) exponentiate()
 	if (player['auto3toggle'].gte('1')) final()
